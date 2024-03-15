@@ -39,8 +39,8 @@ public class Person {
     }
 
     public void PersonInfo() {
-        System.out.println("Name: " + getName() +
-        "\nSurname: " + getSurname() +
-        "\nEmail: " + getEmail() + "\n");
+        System.out.println("\tName: " + getName() +
+        "\n\tSurname: " + getSurname() +
+        "\n\tEmail: " + getEmail() + "\n");
     }
 }

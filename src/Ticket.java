@@ -49,9 +49,9 @@ public class Ticket {
     }
 
     public void TicketInfo() {
-        System.out.println("\033[1mTicket Information\033[0m \nRow: " + getRow() + "\tSeat: " + getSeat() +
-                "\nPrice: \u00A3" + getPrice() +
-                "\n\n\033[1mPerson Information\033[0m");
+        System.out.println("\033[1mTicket Information\033[0m \n\tRow: " + getRow() + "\tSeat: " + getSeat() +
+                "\n\tPrice: \u00A3" + getPrice() +
+                "\n\033[1mPerson Information\033[0m");
         person.PersonInfo();
     }
 }
