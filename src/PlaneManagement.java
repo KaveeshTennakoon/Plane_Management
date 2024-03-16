@@ -1,5 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.io.File;
 
 public class PlaneManagement {
 
@@ -11,7 +12,7 @@ public class PlaneManagement {
 
     public static void main(String[] args) {
 
-        System.out.println("\033[1m" +  "Welcome to the Plane Management application" + "\033[0m");
+        System.out.println("\033[1m" +  "Welcome to the Plane Management application" + "\033[0m\n");
 
         Init_Seats();
         Init_Tickets();
@@ -26,22 +27,28 @@ public class PlaneManagement {
                 switch (option) {
                     case 1:
                         buy_seat();
+                        Menu();
                         break;
 
                     case 2:
                         cancel_seat();
+                        Menu();
                         break;
                     case 3:
                         find_first_available();
+                        Menu();
                         break;
                     case 4:
                         show_seating_plan();
+                        Menu();
                         break;
                     case 5:
                         ticket_price_info();
+                        Menu();
                         break;
                     case 6:
                         search_ticket();
+                        Menu();
                         break;
                     case 0:
                         flag = false;
@@ -55,7 +62,6 @@ public class PlaneManagement {
                 input.nextLine(); //clears the invalid input from scanner
             }
         } while (flag);
-
     }
 
     private static void Init_Seats() {
@@ -78,9 +84,9 @@ public class PlaneManagement {
     }
 
     private static void Menu() {
-        System.out.println("\n**************************************************\n" +
-                "*                  MENU OPTIONS                  *\n" +
-                "**************************************************\n" +
+        System.out.println("*".repeat(50) + "\n" +
+                "*" + " ".repeat(18) + "MENU OPTIONS" + " ".repeat(18) + "*\n" +
+                "*".repeat(50) + "\n" +
                 "\t1) Buy a seat\n" +
                 "\t2) Cancel a seat\n" +
                 "\t3) Find first available seat\n" +
@@ -88,7 +94,7 @@ public class PlaneManagement {
                 "\t5) Print tickets information and total sales\n" +
                 "\t6) Search ticket\n" +
                 "\t0) Quit\n" +
-                "**************************************************");
+                "*".repeat(50));
     }
 
     private static int[] Validate_Seat(){
@@ -160,6 +166,8 @@ public class PlaneManagement {
                 Ticket new_ticket = new Ticket(Seat_Rows[SeatsDetails[0]], SeatsDetails[1], price, new_person);
                 Tickets[SeatsDetails[0]][SeatsDetails[1]-1] = new_ticket;
 
+                new_ticket.save();
+
                 System.out.println("Congratulations! You have successfully booked seat " + Seat_Rows[SeatsDetails[0]] +
                         SeatsDetails[1] + "\n");
                 return; //exits the method
@@ -176,6 +184,11 @@ public class PlaneManagement {
         if (Plane_Seats[SeatsDetails[0]][SeatsDetails[1] - 1] == 1) { //checks if the seat is already booked
             Plane_Seats[SeatsDetails[0]][SeatsDetails[1] - 1] = 0; //mark the seat as available
 
+            String path = "TicketInfo" + File.separator +Seat_Rows[SeatsDetails[0]] + "" + SeatsDetails[1] + ".txt";
+
+            File file = new File(path);
+            file.delete();
+
             Tickets[SeatsDetails[0]][SeatsDetails[1]-1] = null; //removing the saved ticket information
             System.out.println("Seat successfully canceled\n");
         } else {
@@ -188,7 +201,7 @@ public class PlaneManagement {
         for (int row=0; row< Plane_Seats.length; row++){
             for (int number=0; number<Plane_Seats[row].length; number++){
                 if (Plane_Seats[row][number] == 0){
-                    System.out.println("3First available seat: " + Seat_Rows[row] + (number+1) + "\n");
+                    System.out.println("First available seat: " + Seat_Rows[row] + (number+1) + "\n");
                     return;
                 }
             }
@@ -198,9 +211,9 @@ public class PlaneManagement {
 
     private static void show_seating_plan() {
         System.out.println("Seating Plan (O: available, X: unavailable)");
-        for (int i=0; i<Plane_Seats.length; i++){
-            for (int j=0; j<Plane_Seats[i].length; j++){
-                if (Plane_Seats[i][j] == 0){
+        for (int[] row : Plane_Seats) {
+            for (int seat : row) {
+                if (seat == 0){
                     System.out.print("O ");
                 } else {
                     System.out.print("X ");
@@ -212,23 +225,27 @@ public class PlaneManagement {
     }
 
     private static void ticket_price_info() {
+        System.out.println("\033[1mTickets sold during this session:\033[0m");
+        System.out.printf("%-10s %-15s %-11s %-14s %-20s\n", "Seat", "Price(£)", "Name", "Surname", "Email");
+        System.out.println("-".repeat(60));
         double total = 0d;
-        for (int i=0; i<Tickets.length; i++) {
-            for (int j=0; j<Tickets[i].length; j++) {
-                if (Tickets[i][j] != null) { //prints the information if array index is not null
-                    Tickets[i][j].TicketInfo();
-                    total += Tickets[i][j].getPrice();
+        for (Ticket[] row : Tickets) {
+            for (Ticket seat : row) {
+                if (seat != null) { //prints the information if array index is not null
+                    seat.TicketInfo();
+                    total += seat.getPrice();
                 }
             }
         }
-        System.out.println("Total ticket sells price: \u00A3" + total + "\n");
+        System.out.println("-".repeat(60));
+        System.out.println("Total ticket sells : £" + total + "\n");
     }
 
     private static void search_ticket() {
         int[] SeatsDetails = Validate_Seat();
         System.out.println();
         if (Plane_Seats[SeatsDetails[0]][SeatsDetails[1]-1] == 1) {
-            Tickets[SeatsDetails[0]][SeatsDetails[1] - 1].TicketInfo(); //prints ticket information if seat is booked
+            Tickets[SeatsDetails[0]][SeatsDetails[1] - 1].PrintTicket(); //prints ticket information if seat is booked
         } else {
             System.out.println("The seat is available\n");
         }

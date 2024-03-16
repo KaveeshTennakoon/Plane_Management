@@ -15,7 +15,7 @@ public class Person {
 
     //getters and setters
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -23,7 +23,7 @@ public class Person {
     }
 
     public String getSurname() {
-        return surname;
+        return this.surname;
     }
 
     public void setSurname(String surname) {
@@ -31,7 +31,7 @@ public class Person {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -39,8 +39,6 @@ public class Person {
     }
 
     public void PersonInfo() {
-        System.out.println("\tName: " + getName() +
-        "\n\tSurname: " + getSurname() +
-        "\n\tEmail: " + getEmail() + "\n");
+        System.out.printf("%-11s %-14s %-20s\n", getName(), getSurname(), getEmail());
     }
 }
