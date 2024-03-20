@@ -66,7 +66,7 @@ public class PlaneManagement {
 
     private static void Init_Seats() {
         Plane_Seats = new int[][]{
-              new int[14], new int[12], new int[12], new int[14]  // creating seat numbers according each row
+                new int[14], new int[12], new int[12], new int[14]  // creating seat numbers according each row
         };
         // making all the seats as available by marking as 0
         for (int i = 0; i < Plane_Seats.length; i++) {
@@ -156,7 +156,7 @@ public class PlaneManagement {
 
                 double price; //sets price according to their seat
                 if (SeatsDetails[1]<= 5){
-                   price = 200d;
+                    price = 200d;
                 } else if (SeatsDetails[1] <= 9) {
                     price = 150d;
                 } else {
