@@ -1,7 +1,0 @@
-Ticket Information 
-	Seat: A2
-	Price: 200.0
-Person Information 
-	Name: vdls
-	Surname: vdskml
-	Email: vdsla

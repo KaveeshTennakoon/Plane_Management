@@ -1,7 +1,0 @@
-Ticket Information 
-	Seat: A12
-	Price: 180.0
-Person Information 
-	Name: vds
-	Surname: ds
-	Email: sd
