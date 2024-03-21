@@ -18,50 +18,43 @@ public class PlaneManagement {
         Init_Tickets();
         Menu();
 
-        boolean flag = true;
-        do {
+        mainloop:
+        while (true) {
             try {
                 System.out.print("Please select an option: ");
                 int option = input.nextInt();
-                System.out.println();
                 switch (option) {
                     case 1:
                         buy_seat();
-                        Menu();
                         break;
 
                     case 2:
                         cancel_seat();
-                        Menu();
                         break;
                     case 3:
                         find_first_available();
-                        Menu();
                         break;
                     case 4:
                         show_seating_plan();
-                        Menu();
                         break;
                     case 5:
                         ticket_price_info();
-                        Menu();
                         break;
                     case 6:
                         search_ticket();
-                        Menu();
                         break;
                     case 0:
-                        flag = false;
-                        break;
+                        break mainloop;
                     default:
                         System.out.println("Please choose a valid option from 1 to 6");
-                        input.nextLine();
+                        continue mainloop;
                 }
+                Menu();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Enter a number (1-6).");
                 input.nextLine(); //clears the invalid input from scanner
             }
-        } while (flag);
+        }
     }
 
     private static void Init_Seats() {
@@ -140,7 +133,7 @@ public class PlaneManagement {
     }
     private static void buy_seat() {
 
-        while (true) {
+        //while (true) {
             int[] SeatsDetails = Validate_Seat();
             if (Plane_Seats[SeatsDetails[0]][SeatsDetails[1] - 1] == 0) { //checks if the seat is available
                 Plane_Seats[SeatsDetails[0]][SeatsDetails[1] - 1] = 1; //marks the seat as unavailable
@@ -175,7 +168,7 @@ public class PlaneManagement {
                 System.out.println("We're sorry, seat " + Seat_Rows[SeatsDetails[0]] + SeatsDetails[1] + " is unavailable. " +
                         "Please try another seat\n");
             }
-        }
+        //}
     }
 
     private static void cancel_seat() {

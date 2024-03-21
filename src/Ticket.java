@@ -58,10 +58,10 @@ public class Ticket {
     }
 
     public void save() {
-        String path = "TicketInfo" + File.separator + String.valueOf(getRow()) + getSeat() + ".txt";
+        String path = "Ticket Information" + File.separator + String.valueOf(getRow()) + getSeat() + ".txt";
         try {
 
-            File folder = new File("TicketInfo");
+            File folder = new File("Ticket Information");
             if (!folder.exists()) {
                 folder.mkdirs(); //makes a new folder if it doesn't exist
             }

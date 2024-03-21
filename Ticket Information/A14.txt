@@ -1,0 +1,7 @@
+Ticket Information 
+	Seat: A14
+	Price: 180.0
+Person Information 
+	Name: ds
+	Surname: dsva
+	Email: vda
