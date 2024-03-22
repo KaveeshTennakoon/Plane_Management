@@ -44,6 +44,7 @@ public class PlaneManagement {
                         search_ticket();
                         break;
                     case 0:
+                        System.out.println("\nExiting program...")
                         break mainloop;
                     default:
                         System.out.println("Please choose a valid option from 1 to 6");
@@ -177,7 +178,7 @@ public class PlaneManagement {
         if (Plane_Seats[SeatsDetails[0]][SeatsDetails[1] - 1] == 1) { //checks if the seat is already booked
             Plane_Seats[SeatsDetails[0]][SeatsDetails[1] - 1] = 0; //mark the seat as available
 
-            String path = "TicketInfo" + File.separator +Seat_Rows[SeatsDetails[0]] + "" + SeatsDetails[1] + ".txt";
+            String path = "Ticket Information" + File.separator +Seat_Rows[SeatsDetails[0]] + "" + SeatsDetails[1] + ".txt";
 
             File file = new File(path);
             file.delete();
